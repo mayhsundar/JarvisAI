@@ -1,6 +1,6 @@
 ![Jarvis Image](https://static.wikia.nocookie.net/marvelcinematicuniverse/images/b/b0/JuARaVeInSy.png/)
 
-[Get EXE file here](https://github.com/user/repo/blob/branch/other_file.md)
+[Get EXE file here](https://drive.google.com/file/d/1QqAsz9eL5nMajgHWC19J1zVnXBCeWKP_/view?usp=sharing)
 
 # JarvisAI - Personal JARVIS AI system for PC
 
@@ -9,32 +9,38 @@
 An attempt to make a very simple, Personal Assistant that understands speech as well as text input and is capable of performing tasks other than conversing.
 
 - ### Music:
-    say play music - will start youtube with fav songs
+
+  say play music - will start youtube with fav songs
 
 - ### Tells time:
-    say current time - will speak time for you
+
+  say current time - will speak time for you
 
 - ### Gives current 10 top headlines:
-    say today news - will show and speak top 10 headlines
+
+  say today news - will show and speak top 10 headlines
 
 - ### Meaning of a word:
-    say "what is the meaning of **" - would tell the meaning of that word
+
+  say "what is the meaning of \*\*" - would tell the meaning of that word
 
 - ### Shutsdown, restart, logout:
-    say specific word - jarvis will perform that task
+
+  say specific word - jarvis will perform that task
 
 - ### Searches internet:
-    say "search in chrome" - will start searching anything on chrome
+
+  say "search in chrome" - will start searching anything on chrome
 
 - ### Launches Programs:
-    say "open ms word" - will launch word
-    say "open vs code" - will launch visual code
-    
-    more commands can be added
+
+  say "open ms word" - will launch word
+  say "open vs code" - will launch visual code
+
+  more commands can be added
 
 - ### Notes:
-   say "write a note" - will start writing notes for you
-   
+  say "write a note" - will start writing notes for you
 - ### Remember something:
   say "remember" - will remember whatever you will say
 
