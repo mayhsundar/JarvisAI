@@ -1,5 +1,7 @@
 ![Jarvis Image](https://static.wikia.nocookie.net/marvelcinematicuniverse/images/b/b0/JuARaVeInSy.png/)
 
+[Get EXE file here](https://github.com/user/repo/blob/branch/other_file.md)
+
 # JarvisAI - Personal JARVIS AI system for PC
 
 #### Created and Tested on Windows with Python 3+
