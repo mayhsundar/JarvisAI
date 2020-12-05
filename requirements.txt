@@ -1,0 +1,5 @@
+pyttsx3
+speechRecognition
+wikipedia
+pyjokes
+newsapi
