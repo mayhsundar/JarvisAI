@@ -1,3 +1,5 @@
+# made with love by shyam sundar
+
 import pyttsx3 # pip install pyttsx3
 import datetime
 import speech_recognition as sr # pip install speechRecognition
@@ -10,6 +12,8 @@ from newsapi import NewsApiClient
 import json
 from urllib.request import urlopen
 import requests
+
+from googleCustomSearchClass import googleSearch
 
 # Init
 newsapi = NewsApiClient(api_key='2b71328bb53749509e8814fbd3a45512')# pip install newsapi-python
@@ -44,9 +48,9 @@ def speakDate():
     speak("Today's date is "+str(getCurrentDay())+getCurrentMonth()+str(getCurrentYear()))
 
 def wishMe():
-    speak("Welcome Shyam")
+    speak("Welcome sir")
     speakTime()
-    speakDate()
+    # speakDate()
 
     hour = datetime.datetime.now().hour
     
@@ -64,7 +68,7 @@ def wishMe():
     #adding some more texts to that 
     speak(greetingMsg)
 
-    greetingMsg = "Your Jarvis at your service"
+    greetingMsg = "Your assistant at your service"
     speak(greetingMsg)
     greetingMsg ="please tell me how can I help you today?"
     speak(greetingMsg)
@@ -88,29 +92,23 @@ def TakeMyCommand():
     return query
 
 if __name__ == "__main__":
+
+    gs = googleSearch()
     wishMe()
 
     # take input from microphone
     command = TakeMyCommand().lower()
+    
+
+    if command == "none":
+         speak("Query was not good")
 
     # checking time
-    if "time" in command and not "music" in command or "current time" in command or "the time" in command:
+    elif " time" in command and not "music" in command or "current time" in command or "the time" in command:
         speakTime()
 
     elif "the date" in command or "today date" in command or "date" in command:
         speakDate()    
-
-    elif "wikipedia" in command or "on wikipedia" in command:
-        speak("Okay searching on wikipedia")
-        command = command.replace('wikipedia', '')
-        try:
-            result = wikipedia.summary(command, sentences=2)
-            speak("According to wikipedia")
-            print(result)
-            speak(result)
-        except Exception as e:
-            print(e)
-            speak("Sorry couldn't find data on wikipedia") 
 
     elif "joke" in command:
         joke = getAJoke()
@@ -182,7 +180,7 @@ if __name__ == "__main__":
         fav_songs = ["pxQyPsw3ro8&t=95", "87ErHaYgdtg&t=70", "VAZxSoKb65o&t=69", "ZTBwxy4wsBQ&t=202", "Ps4aVpIESkc&list=PL9bw4S5ePsEEqCMJSiYZ-KTtEjzVy0YvK", "Dt5GMToSu5I&t=21"]
         chromePath = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s'
         urlYoutube = "https://www.youtube.com/watch?v="
-        randomDigit = random.randint(0, len(fav_songs))
+        randomDigit = random.randint(0, len(fav_songs)-1)
         wb.get(chromePath).open(urlYoutube+fav_songs[randomDigit])
 
     elif "remember that" in command:
@@ -213,8 +211,8 @@ if __name__ == "__main__":
             speak(title)
             i+=1
 
-    elif "what is the meaning of" in command:
-        commandWord = command.replace("what is the meaning of ",'')  
+    elif "meaning of" in command:
+        commandWord = command.split("meaning of ")[1]  
         googleDictionaryAPI = "https://api.dictionaryapi.dev/api/v2/entries/en/"+commandWord
         try:
             jsonOutput = json.load(urlopen(googleDictionaryAPI))
@@ -229,7 +227,6 @@ if __name__ == "__main__":
         except Exception as e:
             print(e)
             speak("Sorry could not understand, please try again")
-
     elif "shutdown" in command:
         os.system("shutdown /s /t 1")
 
@@ -237,10 +234,9 @@ if __name__ == "__main__":
         os.system("shutdown /r /t 1")    
 
     elif "log out" in command:
-        os.system("shutdown -l")            
+        os.system("shutdown -l")   
 
-
-    
-
-        
-
+    else:
+        gResult = gs.getResult(command)
+        print(gResult)
+        speak(gResult)

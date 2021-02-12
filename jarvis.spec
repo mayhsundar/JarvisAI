@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['jarvis.py'],
-             pathex=['C:\\Users\\demo\\Desktop\\MY-JARVIS'],
+             pathex=[''],
              binaries=[],
              datas=[],
              hiddenimports=[],

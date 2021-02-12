@@ -3,3 +3,5 @@ speechRecognition
 wikipedia
 pyjokes
 newsapi
+selenium
+chromedriver-autoinstaller
