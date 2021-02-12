@@ -115,12 +115,6 @@ if __name__ == "__main__":
         print(joke)
         speak(joke)
 
-    elif "open in chrome" in command:
-        speak("what should I open")
-        chromePath = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s'
-        command = TakeMyCommand().lower()
-        wb.get(chromePath).open(command+".com")
-
     elif "search in google" in command:
         speak("what should I search")
         chromePath = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s'
