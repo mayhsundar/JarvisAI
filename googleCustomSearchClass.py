@@ -1,20 +1,18 @@
 from selenium import webdriver
-import chromedriver_autoinstaller
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
+from webdriver_manager.chrome import ChromeDriverManager
 
 class googleSearch:
-    def __init__(self): 
-        chromedriver_autoinstaller.install()  # Check if the current version of chromedriver exists
-                                        # and if it doesn't exist, download it automatically,
-                                        # then add chromedriver to path
+    def __init__(self):
+
         options = Options()
         options.add_argument('--headless')
         options.add_argument('--disable-gpu')  # Last I checked this was necessary.
-        self.driver = webdriver.Chrome(chrome_options=options)
+        self.driver = webdriver.Chrome(chrome_options=options, executable_path=ChromeDriverManager().install())
 
     def getResult(self, searchQuery):
         driver =  self.driver
@@ -23,7 +21,7 @@ class googleSearch:
             oneResultElement = WebDriverWait(driver, 2).until(EC.presence_of_element_located((By.XPATH, "//div[@class ='Z0LcW XcVN5d']/parent::div[not(@data-attrid='')]/div")))
             resultText = oneResultElement.text
         except TimeoutException:
-            jarvis.speak("Let me think sir")
+            speak("Let me think sir")
             try:
                 oneResultElement = WebDriverWait(driver, 1).until(EC.presence_of_element_located((By.XPATH, "//h2[.='Featured snippet from the web']//ancestor::div[@class='xpdopen']//span[contains(@class,'hgKElc')]")))
                 resultText = oneResultElement.text
@@ -40,7 +38,7 @@ class googleSearch:
                             linkTexts = linkTexts[:10]              
                         resultText = ', '.join(linkTexts)
                     except TimeoutException:
-                        jarvis.speak("trying hard sir")
+                        speak("trying hard sir")
                         try:
                             topResultXpath = "//h2[.='Featured snippet from the web']//ancestor::div[@class='xpdopen']"
                             oneResultElement = WebDriverWait(driver, 1).until(EC.presence_of_element_located((By.XPATH, topResultXpath+"//ul")))
@@ -59,13 +57,12 @@ class googleSearch:
                 resultText = None
 
         if not resultText:
-            jarvis.speak("trying last try sir")
+            speak("trying last try sir")
             try:
                 singleResult = WebDriverWait(driver, 1).until(EC.presence_of_element_located((By.XPATH,"//div[@class='dDoNo vk_bk gsrt gzfeS']")))
                 resultText = singleResult.text
             except TimeoutException:
                 resultText = "Sorry I could not help you in this. please try again"
-        driver.quit()
         return resultText   
 
-import jarvis
+from speakfile import speak

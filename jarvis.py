@@ -1,9 +1,8 @@
 # made with love by shyam sundar
 
-import pyttsx3 # pip install pyttsx3
+from speakfile import speak
 import datetime
 import speech_recognition as sr # pip install speechRecognition
-import wikipedia #pip install wikipedia
 import pyjokes as joke #pip install pyjokes
 import webbrowser as wb
 import os
@@ -11,15 +10,16 @@ import random
 from newsapi import NewsApiClient
 import json
 from urllib.request import urlopen
-import requests
+import sys
 
 from googleCustomSearchClass import googleSearch
 
 # Init
 newsapi = NewsApiClient(api_key='2b71328bb53749509e8814fbd3a45512')# pip install newsapi-python
 
-engine = pyttsx3.init()
 
+quitCommand = False
+gs = googleSearch()
 #get current Year
 def getCurrentYear():
     return datetime.datetime.now().year
@@ -35,10 +35,6 @@ def getCurrentDay():
 # getting a joke
 def getAJoke():
     return joke.get_joke()
-
-def speak(audio):
-    engine.say(audio)
-    engine.runAndWait()
 
 def speakTime():
     Time = datetime.datetime.now().strftime("%I:%M %p") # 12hrs time with am and PM
@@ -91,14 +87,11 @@ def TakeMyCommand():
         return "None"
     return query
 
-if __name__ == "__main__":
-
-    gs = googleSearch()
-    wishMe()
+def run():
 
     # take input from microphone
     command = TakeMyCommand().lower()
-    
+
 
     if command == "none":
          speak("Query was not good")
@@ -108,7 +101,7 @@ if __name__ == "__main__":
         speakTime()
 
     elif "the date" in command or "today date" in command or "date" in command:
-        speakDate()    
+        speakDate()
 
     elif "joke" in command:
         joke = getAJoke()
@@ -120,19 +113,19 @@ if __name__ == "__main__":
         chromePath = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s'
         command = TakeMyCommand().lower()
         urlGoogle = "https://www.google.com/search?q="
-        wb.get(chromePath).open(urlGoogle+command)    
+        wb.get(chromePath).open(urlGoogle+command)
 
     elif "search in youtube" in command:
         speak("what should I search")
         chromePath = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s'
         command = TakeMyCommand().lower()
         urlYoutube = "https://www.youtube.com/results?search_query="
-        wb.get(chromePath).open(urlYoutube+command)  
+        wb.get(chromePath).open(urlYoutube+command)
 
-    elif "bye" in command:
+    elif "bye" in command or "tata" in command:
         speak("Good bye sirr!!!")
         speak("Have a good day")
-        quit()    
+        sys.exit(1)
 
     elif "word" in command:
         speak("Opening MS word")
@@ -206,7 +199,7 @@ if __name__ == "__main__":
             i+=1
 
     elif "meaning of" in command:
-        commandWord = command.split("meaning of ")[1]  
+        commandWord = command.split("meaning of ")[1]
         googleDictionaryAPI = "https://api.dictionaryapi.dev/api/v2/entries/en/"+commandWord
         try:
             jsonOutput = json.load(urlopen(googleDictionaryAPI))
@@ -225,12 +218,20 @@ if __name__ == "__main__":
         os.system("shutdown /s /t 1")
 
     elif "restart" in command:
-        os.system("shutdown /r /t 1")    
+        os.system("shutdown /r /t 1")
 
     elif "log out" in command:
-        os.system("shutdown -l")   
+        os.system("shutdown -l")
 
     else:
         gResult = gs.getResult(command)
         print(gResult)
         speak(gResult)
+
+def start():
+    wishMe()
+    while not quitCommand:
+        run()
+
+start()
+
