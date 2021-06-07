@@ -1,6 +1,6 @@
 ![Jarvis Image](https://static.wikia.nocookie.net/marvelcinematicuniverse/images/b/b0/JuARaVeInSy.png/)
 
-# JarvisAI - Personal JARVIS AI system for PC
+# JarvisAI - Personal JARVIS AI system for PC [Python AI + Selenium]
 
 ## Now can download windows executable file also (jarvis.exe) from dist folder.
 
