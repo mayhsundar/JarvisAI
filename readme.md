@@ -2,6 +2,8 @@
 
 # JarvisAI - Personal JARVIS AI system for PC
 
+## Now can download windows executable file also (jarvis.exe) from dist folder.
+
 #### Created and Tested on Windows with Python 3+
 
 An attempt to make a very simple, Personal Assistant that understands speech as well as text input and is capable of performing tasks other than conversing.
